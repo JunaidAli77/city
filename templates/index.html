@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  
+  
+<style>
+        body {
+            padding-right: 90px;
+            padding-left: 90px;
+            padding-top: 30px;
+            padding-bottom: 40px;      
+            background-image: url('/static/b2.jpg');
+            background-size: cover;
+        }
+
+
+        #logodiv {
+            width: 20%;
+            height: 50px;
+            float: left;
+            margin-top: 5px;
+            padding-left: 40px;
+            font-size: 2.5em;
+            padding-top: 2px;
+            text-shadow: blue 2px 5px 10px;
+        }
+
+        #navigationdiv {
+            width: 68%;
+            height: 50px;
+            float: right;
+            font-size: 1em;
+            margin-top: 2px;
+            padding-top: 5px;
+            padding-right: 30px;
+            padding-bottom: 10px;
+            text-shadow: black 2px 5px 10px;
+        }
+
+        nav {
+            text-shadow: white 2px 5px 10px;
+        }
+
+        li {
+            display: inline;
+            margin-left: 20px;
+            margin-right: 20px;
+            font-size: 1.6em;
+            text-align: left;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        h3 {
+            font-size: 2em;
+        }
+
+        #maindiv2-heading {
+            padding-left:40px;
+            text-align:left;
+            border-bottom: solid;
+            color:black;
+        }
+
+        #footerdiv {
+            width: 100%;
+            height: 6px;
+            margin-top: 80px;
+            float: left;
+            background-color: limegreen;
+        }
+
+        #footerline1 {
+            width: 25%;
+            height: 43px;
+            padding-top: 2px;
+            padding-left: 30px;
+            margin: 0 auto;
+            margin-top: 875px;
+            font-size: 1.2em;
+            line-height: 35px;
+            text-align:center;
+        }
+
+
+
+        #maindiv {
+            width: 66%;
+            height: 670px;
+            margin-top: 25px;
+            margin-right: 30px;
+            margin-bottom: 10px;
+            box-shadow: black 2px 4px 10px;
+            padding-top: 5px;
+            float: left;
+            padding-left: 40px;
+            padding-right: 40px;
+            border-style: groove;
+            border-width: 5px;
+            border-color: floralwhite;
+            border-radius: 30px;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+
+        #maindiv2 {
+            width: 21%;
+            height: 350px;
+            float: right;
+            margin-right: 8px;
+            text-align: left;
+            margin-top: 25px;
+            border-style: groove;
+            border-width: 5px;
+            border-color: floralwhite;
+            box-shadow: black 2px 4px 10px;
+            border-radius: 30px;
+            padding-left: 0px;
+        }
+
+        .w1 {
+            font-size: 1.7em;
+            line-height: 30px;
+            border-bottom: solid;
+            padding-left: 60px;
+        }
+
+        h1 {
+            color: navy;
+            text-align:center;
+        }
+
+        .a {
+            color: blue;
+        }
+
+        h2 {
+            color: navy;
+        }
+
+        b {
+            color: navy;
+        }
+        #link {
+            text-decoration: underline;
+            font-size: 1.2em;
+        }
+        b{
+            font-size:1.2em;
+        }
+       
+    </style>
+
+  
+
+</head>
+
+<body>
+
+
+<div class="login">
+        <div id="logodiv">
+            <img src="/static/logo.png" alt="section" width="70%" height="55px">
+            
+        </div>
+        <div id="navigationdiv">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="home.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="ourproducts.html">Predict Now </a>
+                    </li>
+                    <li>
+                        <a href="process.html">Algorithm</a>
+                    </li>
+                    <li>
+                        <a href="benefits.html">Archieves</a>
+                    </li>
+                    <li>
+                        <a href="contactus.html">About</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div id="maindiv">
+            
+            <h2 align="center">PREDICT PAKISTAN'S MAJOR CITIES POPULATION</h2>
+
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	<input type="text" name="Year" placeholder="Year" required="required" />
+        <input type="text" name="City" placeholder="City" required="required" />
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        
+        
+   <br>
+   <br>
+   <strong>{{ prediction_text }}</strong>
+    <br>
+    <br>
+        <h5>Note: Please enter the desired Code Number in the field of City</h5>
+
+<table style="width:100%">
+  <tr>
+    <td>101 for Karachi</td>
+    <td>501 for Multan</td>
+    <td>901 for Quetta</td>
+  </tr>
+  <tr>
+    <td>201 for Lahore</td>
+    <td>601 for Hyderabad</td>
+     <td>1001 for Islamabad</td>
+  </tr>
+  <tr>
+    <td>301 for Faisalabad</td>
+    <td>701 for Gujranwala</td>
+    <td>1101 for Sargodha</td>
+  </tr>
+  <tr>
+    <td>401 for Rawalpindi</td>
+    <td>801 for Peshawar</td>
+    <td>1201 for Sialkot</td>
+  </tr>
+</table>
+        
+    </form>
+    
+    
+    <br>
+    <center>
+              <img border="0" alt="Predict" src="/static/Predict.png" width="100%" height="100%">
+              
+    </center>
+         
+    <br>
+    <text>As one of the most populous countries in the world, Pakistan is also home to some of the world's megacities. Its most populous city, Karachi, is not only the largest in Pakistan but is also the 7th most populous city in the world, boasting a population that exceeds 11 million people. Pakistan's 2nd most populous city, 
+    Lahore, is only about half the size, with just 6.3 million people, but is still the world's 15th most populous city. Pakistan has six additional cities that have passed the one million population mark. While these cities contribute greatly to the country's overall population, there are still many large cities that add to these numbers. Fifty-six cities have populations between 100,000 and 1,000,000, while 285 cities have populations of at least 10,000.</text>
+         
+ </div>
+           <!--<center>
+                <img src="/predict" alt="Prediction">
+            </center>-->
+            
+        </div>
+    </div>
+    <div id="maindiv2">
+        <p id="w2"><h1 id="maindiv2-heading">Predict Now</h1></p>
+
+        <p class="w1"> <a class="a" href="pakistan.html"><b> Pakistan</b></a></p>
+
+        <p class="w1"> <a class="a" href="province.html"><b>Province</b></a></p>
+
+        <p class="w1"> <a class="a" href="city.html"><b>City</b></a></p>
+
+        <p class="w1"> <a class="a" href="district.html"><b>District</b></a></p>
+
+
+    </div>
+
+    <div id="footerdiv">
+    </div>
+
+    <p id="footerline1"> DISCLAIMER  </p>
+    <text>
+    Advance Census System, does not provide personal or financial advice to individuals or act as an advisor to individuals or government officials.
+    All predictions strategies include the risk of loss for some. Before persuing any population prediction strategies discussed on this website you should always consult with licensed government officials.
+    <text/>
+    
+</body>
+</html>
